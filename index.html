@@ -176,12 +176,12 @@
   const result = document.getElementById('result');
   const stats = { total: 0, active: 0, inactive: 0, error: 0, checked: 0 };
 
-  // Memisahkan setiap baris proxy (IP:PORT)
+  // Memisahkan setiap baris proxy (IP:PORT) dan menghapus spasi ekstra
   const lines = Array.from(new Set(
     inputEl.value.trim().split('\n').map(x => x.trim()).filter(Boolean)
   ));
 
-  // Menampilkan jumlah total proxy yang akan diperiksa
+  // Memastikan setiap baris diproses dengan benar
   inputEl.value = lines.join('\n');
   result.innerHTML = '';
   document.getElementById('total').textContent = lines.length;
@@ -192,11 +192,13 @@
 
   stats.total = lines.length;
 
-  // Memproses setiap baris (proxy)
   const tasks = lines.map(async (line, i) => {
     const [ip, port] = line.split(':'); // Memisahkan IP dan port berdasarkan tanda ":"
-    if (!ip || !port) return;
+    if (!ip || !port) {
+      return; // Melewatkan baris jika IP atau port tidak valid
+    }
 
+    // Memastikan baris proxy benar dan tidak kosong
     const row = result.insertRow();
     row.insertCell().textContent = i + 1; // Nomor urut
     row.insertCell().textContent = ip;   // IP
@@ -231,6 +233,7 @@
   await Promise.allSettled(tasks);
   saveResultsToLocalStorage();
 }
+
 
     function getActiveProxies() {
       return Array.from(document.querySelectorAll('#result tr'))
