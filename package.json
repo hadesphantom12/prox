@@ -1,0 +1,12 @@
+{
+  "name": "proxy-checker",
+  "version": "1.0.0",
+  "description": "A simple proxy checker using serverless functions.",
+  "main": "index.js",
+  "scripts": {
+    "build": "echo \"No build needed for static site\""
+  },
+  "dependencies": {
+    "isomorphic-fetch": "^3.0.0"
+  }
+}
