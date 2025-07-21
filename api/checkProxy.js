@@ -2,7 +2,7 @@ export default async function handler(req, res) {
   if (req.method === "POST") {
     try {
       const { ip, port } = req.body;
-      const url = `https://api-proxy-checke.vercel.app/api/v1?ip=${ip}&port=${port}`;
+      const url = `https://api-proxy-checker.vercel.app/api/v1?ip=${ip}&port=${port}`;
       const response = await fetch(url);
       const data = await response.json();
       res.status(200).json(data);
